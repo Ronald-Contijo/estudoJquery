@@ -60,13 +60,17 @@
 </head>
 
 <body class="bg-rose-100 bg-gradient-to-r from-red-500 to-pink-500">
+    <div class="">
     <div class="rounded-lg shadow-md container mx-auto pt-4 bg-gray-200 mt-4 section">
-        <h1 class="text-2xl text-center font-bold pb-4">Clique no botão para gerar uma cor aleatória</h1>
+        <h1 id="titulo" class="text-2xl text-center font-bold p-4 rounded-lg m-4 bg-gray-500 text-white shadow-md">Clique no botão para gerar uma cor aleatória</h1>
         <div class="grid grid-rows-4 grid-cols-2 gap-4">
             <button>x</button><button>x</button><button>x</button><button>x</button>
+            <button>x</button><button>x</button><button>x</button><button>x</button>
         </div>
-
+        <br>
+        <button id="copyButton" class="w-full bg-gray-500 mb-4 text-white p-2 rounded-lg hover:bg-gray-600 transition-colors">Copiar</button>
     </div>
+
 <script>
 function geraCorAleatoria() {
     // Gera um número hexadecimal q é uma cior
@@ -74,17 +78,38 @@ function geraCorAleatoria() {
 }
 function botaoCorAleatorio() {
     const $this = $(this); // Usa o 'this' do evento de clique
-    $this.text (geraCorAleatoria());
+    const cor = geraCorAleatoria();
+    $this.text (cor);
+    const btnCop = $("#copyButton").removeClass("bg-orange-500");
+    $("#titulo").css({
+        "background-color": cor
+    });
+    btnCop.text("Cor: " + cor);
+    btnCop.css({
+        "background-color": cor,
+        "color": "white",
+        "border": "none"
+    });
     $this.css({
-        "background-color": geraCorAleatoria(),
+        "background-color": cor,
         "color": "white",
         "border": "none"
     });
 }
 
 $(document).ready(function() {
-    $("button").addClass("bg-orange-500 text-white p-8 rounded-lg hover:bg-orange-400");
-    $("button").click(botaoCorAleatorio); // Associa a função como manipulador de evento
+    $("button").addClass("bg-gray-500 text-white p-8 rounded-lg hover:bg-gray-400");
+    $("button").not("#copyButton").click(botaoCorAleatorio); // Associa a função como manipulador de evento
+
+    $('#copyButton').click(function() {
+        const colorCode = $('#lastColorCode').text();
+        navigator.clipboard.writeText(colorCode).then(() => {
+            console.log('Cor copiada: ' + colorCode);
+        }).catch(() => {
+            alert('Erro ao copiar a cor!');
+        });
+        $('#copyButton').text("Copiado!");
+    });
 });
 </script>
 </body>
