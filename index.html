@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism-okaidia.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/components/prism-markup.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <style>
+        code {
+            color: #21038f;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .section {
+            padding-left: 8em;
+            padding-right: 8em;
+        }
+
+        /* Tablets e telas médias */
+        @media (max-width: 1024px) {
+            .section {
+                padding-left: 4em;
+                padding-right: 4em;
+            }
+        }
+
+        /* Celulares grandes */
+        @media (max-width: 768px) {
+            .section {
+                padding-left: 2em;
+                padding-right: 2em;
+            }
+        }
+
+        /* Celulares piquenos */
+        @media (max-width: 480px) {
+            .section {
+                padding-left: 1em;
+                padding-right: 1em;
+            }
+        }
+
+    </style>
+</head>
+
+<body class="bg-rose-100 bg-gradient-to-r from-red-500 to-pink-500">
+    <div class="rounded-lg shadow-md container mx-auto pt-4 bg-gray-200 mt-4 section">
+        <h1 class="text-2xl text-center font-bold pb-4">Clique no botão para gerar uma cor aleatória</h1>
+        <div class="grid grid-rows-4 grid-cols-2 gap-4">
+            <button>x</button><button>x</button><button>x</button><button>x</button>
+        </div>
+
+    </div>
+<script>
+function geraCorAleatoria() {
+    // Gera um número hexadecimal q é uma cior
+    return '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
+}
+function botaoCorAleatorio() {
+    const $this = $(this); // Usa o 'this' do evento de clique
+    $this.text (geraCorAleatoria());
+    $this.css({
+        "background-color": geraCorAleatoria(),
+        "color": "white",
+        "border": "none"
+    });
+}
+
+$(document).ready(function() {
+    $("button").addClass("bg-orange-500 text-white p-8 rounded-lg hover:bg-orange-400");
+    $("button").click(botaoCorAleatorio); // Associa a função como manipulador de evento
+});
+</script>
+</body>
+</html>
